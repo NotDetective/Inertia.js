@@ -1,8 +1,8 @@
 <script setup>
-import {Link} from "@inertiajs/inertia-vue3";
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
-    auth: String
+    auth: Object,
 })
 
 </script>
@@ -14,4 +14,7 @@ defineProps({
     </div>
 
     <Link :href="route('logout')" method="post" as="button">Logout</Link>
+
+    <Link href="/users">users</Link>
 </template>
+np
