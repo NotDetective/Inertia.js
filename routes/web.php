@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,9 @@ Route::middleware(['auth'])
 
 
         Route::get('/', function () {
-            return Inertia::render('Index') ;
+            return Inertia::render('Index', [
+                'users' => User::select('id', 'name')->get(),
+            ]) ;
         })->name('index');
 
     });
