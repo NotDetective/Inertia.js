@@ -1,9 +1,8 @@
 <script setup>
-import {Link} from "@inertiajs/inertia-vue3";
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
-    auth: String,
-    users: Array,
+    auth: Object,
 })
 
 </script>
@@ -16,8 +15,6 @@ defineProps({
 
     <Link :href="route('logout')" method="post" as="button">Logout</Link>
 
-    <ul>
-        <li v-for="user in users" :key="user.id" v-text="user.name" />
-    </ul>
-
+    <Link href="/users">users</Link>
 </template>
+np
