@@ -1,0 +1,46 @@
+<script setup>
+import {Link} from '@inertiajs/vue3'
+
+const props = defineProps({
+    links: {
+        type: Object,
+        required: true,
+    },
+})
+</script>
+
+<template>
+    <div class="w-screen flex justify-center">
+        <nav class="flex w-11/12 items-center justify-between border-t border-gray-200 px-4 sm:px-0">
+            <div class="-mt-px flex w-0 flex-1">
+                <Link :href="links[0].url ?? '#'"
+                      class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                    Previous
+                </Link>
+            </div>
+            <div class="hidden md:-mt-px md:flex">
+
+                <Link :href="link.url ?? '#'"
+                      v-for="(link, index) in links"
+                      :key="link.label"
+                      as="button"
+                      :disabled="link.url === null"
+                      :class="{
+                        'inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-60' : link.active,
+                        'inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' : !link.active,
+                        'hidden' : index === 0 || index === links.length - 1,
+                    }"
+                >
+                    {{ link.label }}
+                </Link>
+            </div>
+            <div class="-mt-px flex w-0 flex-1 justify-end">
+                <Link :href="links[links.length - 1].url ?? '#'"
+                      class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                    Next
+                </Link>
+            </div>
+        </nav>
+    </div>
+</template>
+
