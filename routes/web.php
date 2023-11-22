@@ -29,7 +29,7 @@ Route::middleware(['auth'])
                 ->when($request->input('search'), function ($query, $search) {
                     $query->where('name', 'LIKE', "%{$search}%");
                 })
-                ->paginate(10)
+                ->paginate(8)
                 ->withQueryString();
             return Inertia::render('Users', [
                 'users' => $users,
