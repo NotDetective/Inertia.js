@@ -7,8 +7,10 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'create'])
+    ->middleware('guest')
     ->name('login');
 Route::post('/login', [LoginController::class, 'store'])
+    ->middleware('guest')
     ->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
@@ -23,7 +25,7 @@ Route::middleware(['auth'])
 
         Route::get('/users', function (Request $request) {
             $users = User::query()
-                ->select('id', 'name')
+                ->select('id', 'name', 'email')
                 ->when($request->input('search'), function ($query, $search) {
                     $query->where('name', 'LIKE', "%{$search}%");
                 })
@@ -40,6 +42,7 @@ Route::middleware(['auth'])
         })->name('users.create');
 
         Route::post('/users', function (Request $request) {
+            sleep(3);
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
