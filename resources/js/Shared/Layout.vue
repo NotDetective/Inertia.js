@@ -14,6 +14,7 @@ let greeting = [
     'Ciao',
     ][Math.floor(Math.random() * 7)
     ];
+
 </script>
 
 <template>
