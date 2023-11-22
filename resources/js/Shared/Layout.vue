@@ -29,7 +29,7 @@ let greeting = [
                 </div>
                 <div class="ml-3">
                     <h1 class="text-3xl">Simple Inertia Demo site</h1>
-                    <p>{{ greeting }} {{ auth.user.username }}!</p>
+                    <p>{{ greeting }}, {{ auth.user.username }}!</p>
                 </div>
             </div>
 
