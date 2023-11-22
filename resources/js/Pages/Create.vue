@@ -1,9 +1,10 @@
 <script setup>
 import {useForm} from "@inertiajs/vue3";
 import {ref} from "vue";
+import {Head} from "@inertiajs/inertia-vue3";
 
 defineProps({
-    error: Object,
+    errors: Object,
 })
 
 let form = useForm({
@@ -19,6 +20,8 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Demo - Create" />
+
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Add users</h2>
@@ -41,6 +44,7 @@ const submit = () => {
                             required
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    <p class="mt-2 text-sm text-red-600" v-if="errors.name" v-text="errors.name"></p>
                 </div>
 
                 <div>
@@ -55,6 +59,7 @@ const submit = () => {
                             required
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    <p class="mt-2 text-sm text-red-600" v-if="errors.email" v-text="errors.email"></p>
                 </div>
 
                 <div>

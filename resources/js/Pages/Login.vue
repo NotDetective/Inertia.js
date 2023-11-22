@@ -6,6 +6,11 @@
 
 <script setup>
 import {useForm} from "@inertiajs/vue3";
+import {Head} from "@inertiajs/inertia-vue3";
+
+defineProps({
+    errors: Object,
+})
 
 let form = useForm({
     email: '',
@@ -19,6 +24,8 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Demo - Login" />
+
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-10 w-auto" src="images/smily-logo-placeholder.png" alt="Your Company">
@@ -57,6 +64,7 @@ const submit = () => {
                     </div>
                 </div>
 
+                <p v-if="errors.message" class="text-sm text-red-500">{{ errors.message }}</p>
                 <div>
                     <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
                 </div>

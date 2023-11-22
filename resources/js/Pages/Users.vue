@@ -3,6 +3,7 @@ import {ref, watch} from "vue";
 import {Link, router} from '@inertiajs/vue3'
 import Pagination from "@/Shared/pagination.vue";
 import throttle from "lodash.throttle";
+import {Head} from "@inertiajs/inertia-vue3";
 
 const props = defineProps({
     users: Object,
@@ -20,6 +21,7 @@ watch(search, throttle((value) => {
 </script>
 
 <template>
+    <Head title="Demo - Users" />
     <main class="h-screen flex flex-col">
         <section class="flex-1 mt-7">
 
@@ -48,7 +50,10 @@ watch(search, throttle((value) => {
                 <div class="mt-8 flow-root">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                            <table class="min-w-full divide-y divide-gray-300">
+
+                            <table
+                                v-if="users.data.length > 0"
+                                class="min-w-full divide-y divide-gray-300">
                                 <thead>
                                 <tr>
                                     <th scope="col"
@@ -93,6 +98,10 @@ watch(search, throttle((value) => {
                                 </tr>
                                 </tbody>
                             </table>
+
+                            <div v-else class="flex justify-center items-center">
+                                <p class="text-gray-500">No users found.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
