@@ -1,8 +1,7 @@
 <script setup>
 import {ref, watch} from "vue";
-import {Link, router} from '@inertiajs/vue3'
-import Pagination from "@/Shared/pagination.vue";
-import throttle from "lodash.throttle";
+import { router } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
     users: Object,
@@ -10,64 +9,48 @@ const props = defineProps({
 
 let search = ref('');
 
-watch(search, throttle((value) => {
-    router.get('/users', {search: value}, {
+watch(search, (value) => {
+    router.get('/users', { search: value }, {
         preserveState: true,
         preserveScroll: true,
-        debounce: 500,
     });
-}, 500))
+})
 </script>
 
 <template>
-    <main class="h-screen flex flex-col">
-        <section class="flex-1 mt-7">
 
-            <div class="px-4 sm:px-6 lg:px-8">
-                <div class="sm:flex sm:items-center">
-                    <div class="sm:flex-auto">
-                        <h1 class="text-base font-semibold leading-6 text-gray-900">Users</h1>
-                        <p class="mt-2 text-sm text-gray-700">A list of all the users.</p>
-                    </div>
-                    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none w-1/4">
-                        <div>
-                            <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Search</label>
-                            <div class="mt-2">
-                                <input v-model="search"
-                                       name="search"
-                                       type="text"
-                                       placeholder="search..." class="block mb-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
-                        </div>
-                        <Link :href="route('users.create')" as="button"
-                              class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            Add user
-                        </Link>
-                    </div>
-                </div>
-                <div class="mt-8 flow-root">
-                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                            <table class="min-w-full divide-y divide-gray-300">
-                                <thead>
-                                <tr>
-                                    <th scope="col"
-                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                                        Name
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                                        <span class="sr-only">Edit</span>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 bg-white">
-                                <tr
-                                    v-for="user in users.data"
-                                    :key="user.id"
+    <div>
+        <h1>Users</h1>
+    </div>
 
+<<<<<<< Updated upstream
+    <input type="text" v-model="search" placeholder="search for user">
+
+    <Link :href="route('users.create')" as="button">Create User</Link>
+
+    <ul>
+        <Link
+            :href="route('users.edit', user.id)"
+            v-for="user in users.data"
+            :key="user.id"
+        >
+            <li v-text="user.name" />
+        </Link>
+    </ul>
+
+    <ul class="pagination">
+        <Link
+            v-for="link in users.links"
+            :href="link.url ?? '#'"
+            :key="link.id"
+            :class="{
+                active: link.active,
+            }"
+            as="button"
+            :disabled="link.active || link.url === null"
+        >{{ link.label }}</Link>
+    </ul>
+=======
                                 >
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="flex items-center">
@@ -77,6 +60,7 @@ watch(search, throttle((value) => {
                                             </div>
                                             <div class="ml-4">
                                                 <div class="font-medium text-gray-900">{{ user.name }}</div>
+                                                <div class="text-sm text-gray-500">{{ user.email }}</div>
                                             </div>
                                         </div>
                                     </td>
@@ -101,4 +85,26 @@ watch(search, throttle((value) => {
             <Pagination :links="users.links"/>
         </section>
     </main>
+>>>>>>> Stashed changes
 </template>
+
+<style>
+    .pagination {
+        font-size: large;
+        color: white;
+        display: flex;
+        list-style: none;
+    }
+    .pagination button{
+        background-color: #4a5568;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem;
+        margin-left: 0.6rem;
+        color: white;
+    }
+    button:disabled{
+        background-color: #29313d;
+        color: red;
+    }
+</style>
