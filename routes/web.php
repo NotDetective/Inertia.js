@@ -33,6 +33,7 @@ Route::middleware(['auth'])
                 ->withQueryString();
             return Inertia::render('Users', [
                 'users' => $users,
+                'filters' => $request->all('search'),
             ]);
 
         })->name('users');
