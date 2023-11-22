@@ -58,7 +58,7 @@ Route::middleware(['auth'])
 
         Route::get('/users/{user}/edit', function (User $user) {
             return Inertia::render('Edit', [
-                'user' => $user
+                'user' => $user->only('id', 'name', 'email'),
             ]);
         })->name('users.edit');
 
