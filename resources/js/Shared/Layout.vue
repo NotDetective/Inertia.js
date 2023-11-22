@@ -13,7 +13,7 @@ let greeting = [
     'Bonjour',
     'Ciao',
     ][Math.floor(Math.random() * 7)
-    ];
+];
 
 </script>
 
@@ -23,7 +23,9 @@ let greeting = [
 
             <div class="flex items-center">
                 <div class="w-20 h-20">
-                    <img class="rounded-full" src="images/smily-logo-placeholder.png" alt="">
+                    <Link :href="route('index')">
+                        <img class="rounded-full" src="images/smily-logo-placeholder.png" alt="website logo">
+                    </Link>
                 </div>
                 <div class="ml-3">
                     <h1 class="text-3xl">Simple Inertia Demo site</h1>
