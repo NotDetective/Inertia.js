@@ -30,7 +30,7 @@ let greeting = [
                         this is done so that if you refresh on any page you will still see the logo
                         Maybe there is a better way to do this
                          -->
-                        <img class="rounded-full" :src="`${route('index')}/images/smily-logo-placeholder.png`" alt="website logo">
+                        <img class="rounded-full" :src="`${route('index')}/images/smiley-logo-placeholder.png`" alt="website logo">
                     </Link>
                 </div>
                 <div class="ml-3">
