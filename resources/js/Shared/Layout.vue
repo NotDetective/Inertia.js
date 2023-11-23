@@ -4,6 +4,7 @@ import NavItem from "@/Shared/NavItem.vue";
 defineProps({
     auth: Object,
 })
+
 let greeting = [
     'Hello',
     'Hi',

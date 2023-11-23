@@ -43,7 +43,9 @@ Route::middleware(['auth'])
         })->name('users.create');
 
         Route::post('/users', function (Request $request) {
+            //added sleep for testing purposes
             sleep(3);
+
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
