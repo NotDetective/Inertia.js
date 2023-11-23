@@ -1,6 +1,6 @@
 <script setup>
 import {ref, watch} from "vue";
-import {Link, router} from '@inertiajs/vue3'
+import {router} from '@inertiajs/vue3'
 import Pagination from "@/Shared/pagination.vue";
 import throttle from "lodash.throttle";
 import {Head} from "@inertiajs/inertia-vue3";
