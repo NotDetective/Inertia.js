@@ -35,39 +35,47 @@ let greeting = [
                 </div>
                 <div class="ml-3">
                     <h1 class="text-3xl">Simple Inertia Demo site</h1>
-                    <!-- greeting only change on page refresh this is done to show that the page doest refresh much -->
-                    <p>{{ greeting }}, {{ auth.user.username }}!</p>
                 </div>
             </div>
 
-            <nav class="flex gap-4">
+            <div class="flex flex-col h-full items-end justify-evenly">
+                <!-- greeting only change on page refresh this is done to show that the page doest refresh much -->
+                <div class="flex items-center mb-2">
+                    <p>{{ greeting }}, {{ auth.user.username }}!</p>
+                    <img
+                        class="w-10 h-10 rounded-full ml-2"
+                        :src="auth.user.avatar === '' ? 'https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg' : auth.user.avatar"
+                        alt="login user avatar">
+                </div>
 
-                <!--
-                NavItem is just a Link
-                Link is a component that is provided by inertia
-                this way if you want to go to a other page
-                you dont have to refresh the page
-                -->
-                <NavItem
-                    :active="route().current() === 'index'"
-                    href="/"
-                >
-                    Home
-                </NavItem>
-                <NavItem
-                    :active="route().current() === 'users'"
-                    href="/users"
-                >
-                    Users
-                </NavItem>
-                <NavItem
-                    href="/logout"
-                    method="post"
-                    as="button"
-                >
-                    Logout
-                </NavItem>
-            </nav>
+                <nav class="flex gap-4">
+                    <!--
+                    NavItem is just a Link
+                    Link is a component that is provided by inertia
+                    this way if you want to go to a other page
+                    you dont have to refresh the page
+                    -->
+                    <NavItem
+                        :active="route().current() === 'index'"
+                        href="/"
+                    >
+                        Home
+                    </NavItem>
+                    <NavItem
+                        :active="route().current() === 'users'"
+                        href="/users"
+                    >
+                        Users
+                    </NavItem>
+                    <NavItem
+                        href="/logout"
+                        method="post"
+                        as="button"
+                    >
+                        Logout
+                    </NavItem>
+                </nav>
+            </div>
         </header>
 
         <main class="mt-4 flex justify-center h-5/6">

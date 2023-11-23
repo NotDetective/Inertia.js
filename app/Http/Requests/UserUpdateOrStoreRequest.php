@@ -23,7 +23,8 @@ class UserUpdateOrStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => ['required', 'email', 'unique:users,email,'],
+            'email' => ['required', 'email', 'unique:users,email, ' . optional($this->user)->id],
+            'avatar' => ['nullable', 'image', 'max:1024'],
         ];
     }
 }

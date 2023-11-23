@@ -14,12 +14,18 @@ class UserController extends Controller
         // normal laravel
         $users = User::query()
             ->select('id', 'name', 'email')
+            ->with('media')
             ->when($request->input('search'), function ($query, $search) {
                 $query->where('name', 'LIKE', "%{$search}%");
             })
             ->latest()
             ->paginate(8)
             ->withQueryString();
+
+        foreach ($users as $user) {
+            $user->avatar = $user->getFirstMediaUrl('avatars');
+        }
+
         // Instead of returning a view we let inertia render the page
         // A inertia renders a Vue component with that name
         // A inertia render can also pass data to the Vue component just like a view
@@ -39,14 +45,18 @@ class UserController extends Controller
     public function store(UserUpdateOrStoreRequest $request)
     {
         // Simulate a slow request
-        sleep(3);
+//        sleep(3);
 
         // normal laravel
-        User::create([
+        $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => 'password',
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+        }
 
         // Instead of using a redirect we use to_route()
         // This way the page doest refresh after the request
@@ -55,11 +65,13 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $user['avatar'] = $user->getFirstMediaUrl('avatars');
+
         // Instead of returning a view we let inertia render the page
         // A inertia renders a Vue component with that name
         // A inertia render can also pass data to the Vue component just like a view
         return Inertia::render('Edit', [
-            'user' => $user->only('id', 'name', 'email'),
+            'user' => $user,
         ]);
     }
 
@@ -70,6 +82,10 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+        }
 
         // Instead of using a redirect we use to_route()
         // This way the page doest refresh after the request
