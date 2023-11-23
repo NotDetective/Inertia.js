@@ -35,6 +35,7 @@ let greeting = [
                 </div>
                 <div class="ml-3">
                     <h1 class="text-3xl">Simple Inertia Demo site</h1>
+                    <p class="text-sm">This is a demo site to see how inertia works</p>
                 </div>
             </div>
 
