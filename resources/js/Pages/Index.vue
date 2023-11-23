@@ -31,7 +31,7 @@ import {Head} from '@inertiajs/inertia-vue3'
             </li>
         </ul>
 
-        <p class="mb-4">The site uses the following packages:</p>
+        <p class="mb-4">The site uses the following tools:</p>
 
         <ul class="list-disc list-inside">
             <li>
@@ -52,6 +52,12 @@ import {Head} from '@inertiajs/inertia-vue3'
             <li>
                 <a href="https://lodash.com/" target="_blank" class="text-blue-500 hover:underline">Lodash</a>
             </li>
+            <li>
+                <a href="https://github.com/barryvdh/laravel-debugbar" target="_blank" class="text-blue-500 hover:underline">Laravel Debugbar</a>
+            </li>
+            <li>
+                <a href="https://spatie.be/docs/laravel-medialibrary/v10/introduction" target="_blank" class="text-blue-500 hover:underline">Spatie medialibrary</a>
+            </li>
         </ul>
 
         <p class="mb-4">The site uses the following features:</p>
@@ -65,12 +71,13 @@ import {Head} from '@inertiajs/inertia-vue3'
             <li>Throttling</li>
             <li>Form validation</li>
             <li>Form error messages</li>
+            <li>File uploads</li>
         </ul>
 
         <p class="mb-4">
             Note that the site is mostly tailwind ui components. And make use of dummy data.
         </p>
-
+        
     </div>
 </template>
 
