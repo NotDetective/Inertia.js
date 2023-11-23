@@ -74,10 +74,6 @@ import {Head} from '@inertiajs/inertia-vue3'
             <li>File uploads</li>
         </ul>
 
-        <p class="mb-4">
-            Note that the site is mostly tailwind ui components. And make use of dummy data.
-        </p>
-        
     </div>
 </template>
 
