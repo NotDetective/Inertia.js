@@ -25,36 +25,58 @@ let greeting = [
             <div class="flex items-center">
                 <div class="w-20 h-20">
                     <Link :href="route('index')">
-                        <img class="rounded-full" :src="`${route('index')}/images/smily-logo-placeholder.png`" alt="website logo">
+                        <!--
+                        i am using route('index') so that i always use the full path
+                        this is done so that if you refresh on any page you will still see the logo
+                        Maybe there is a better way to do this
+                         -->
+                        <img class="rounded-full" :src="`${route('index')}/images/smiley-logo-placeholder.png`" alt="website logo">
                     </Link>
                 </div>
                 <div class="ml-3">
                     <h1 class="text-3xl">Simple Inertia Demo site</h1>
-                    <p>{{ greeting }}, {{ auth.user.username }}!</p>
+                    <p class="text-sm">This is a demo site to see how inertia works</p>
                 </div>
             </div>
 
-            <nav class="flex gap-4">
-                <NavItem
-                    :active="route().current() === 'index'"
-                    href="/"
-                >
-                    Home
-                </NavItem>
-                <NavItem
-                    :active="route().current() === 'users'"
-                    href="/users"
-                >
-                    Users
-                </NavItem>
-                <NavItem
-                    href="/logout"
-                    method="post"
-                    as="button"
-                >
-                    Logout
-                </NavItem>
-            </nav>
+            <div class="flex flex-col h-full items-end justify-evenly">
+                <!-- greeting only change on page refresh this is done to show that the page doest refresh much -->
+                <div class="flex items-center mb-2">
+                    <p>{{ greeting }}, {{ auth.user.username }}!</p>
+                    <img
+                        class="w-10 h-10 rounded-full ml-2"
+                        :src="auth.user.avatar === '' ? 'https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg' : auth.user.avatar"
+                        alt="login user avatar">
+                </div>
+
+                <nav class="flex gap-4">
+                    <!--
+                    NavItem is just a Link
+                    Link is a component that is provided by inertia
+                    this way if you want to go to a other page
+                    you dont have to refresh the page
+                    -->
+                    <NavItem
+                        :active="route().current() === 'index'"
+                        href="/"
+                    >
+                        Home
+                    </NavItem>
+                    <NavItem
+                        :active="route().current() === 'users'"
+                        href="/users"
+                    >
+                        Users
+                    </NavItem>
+                    <NavItem
+                        href="/logout"
+                        method="post"
+                        as="button"
+                    >
+                        Logout
+                    </NavItem>
+                </nav>
+            </div>
         </header>
 
         <main class="mt-4 flex justify-center h-5/6">
