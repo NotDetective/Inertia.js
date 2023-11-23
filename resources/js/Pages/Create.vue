@@ -9,13 +9,20 @@ defineProps({
 
 let form = useForm({
     email: '',
-    name: ''
+    name: '',
+    avatar: null,
 });
 
 let prepossessing = ref(false);
+let url = ref('');
 
+const onFileChange = (event) => {
+    form.avatar = event.target.files[0];
+    url.value = URL.createObjectURL(form.avatar);
+}
 const submit = () => {
     form.post(route('users.store'), {
+        forceFormData: true,
         onSuccess: () => {
             prepossessing.value = false;
         },
@@ -71,6 +78,29 @@ const submit = () => {
                     </div>
                     <p class="mt-2 text-sm text-red-600" v-if="errors.email" v-text="errors.email"></p>
                 </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">avatar</label>
+                    <div class="mt-2 flex items-center">
+                        <input
+                            @input="onFileChange($event)"
+                            id="avatar"
+                            name="avatar"
+                            type="file"
+                            class="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+
+                        <img
+                            v-if="url !== ''"
+                            class="w-20 h-20 rounded-full ml-2"
+                            :src="url" alt="">
+
+                    </div>
+                    <p class="mt-2 text-sm text-red-600" v-if="errors.avatar" v-text="errors.avatar"></p>
+                </div>
+
+                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                    {{ form.progress.percentage }}%
+                </progress>
 
                 <div>
                     <button
