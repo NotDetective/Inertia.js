@@ -16,12 +16,24 @@ let form = useForm({
 });
 
 const submit = () => {
-    form.patch(route('users.update', props.user.id));
+    form.patch(route('users.update', props.user.id), {
+        onSuccess: () => {
+            prepossessing.value = false;
+        },
+        onStart: () => {
+            prepossessing.value = true;
+        },
+        onError: () => {
+            prepossessing.value = false;
+        }
+    });
 }
 
 const destroy = () => {
-    alert('Are you sure you want to delete this user?')
-    form.delete(route('users.destroy', props.user.id) );
+    if (confirm('Are you sure you want to delete this user?')) {
+        //action confirmed
+        form.delete(route('users.destroy', props.user.id) );
+    }
 }
 </script>
 
@@ -70,11 +82,37 @@ const destroy = () => {
 
                 <div>
                     <button type="submit"
+                            :disabled="prepossessing"
+                            :class="{ 'opacity-50 cursor-not-allowed': prepossessing }"
                             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         Edit User
                     </button>
                 </div>
             </form>
+
+            <!--
+
+            this is a option for delete button
+
+            <Link
+                :href="route('users.destroy', user.id)"
+                as="button"
+                method="destroy"
+                class="flex w-1/4 mt-2 justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            >
+                Delete User
+            </Link>
+             -->
+
+            <!-- this option is making use of the a function -->
+            <button
+                @click="destroy"
+                type="button"
+                class="flex w-1/3 mt-2 justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            >
+                Delete User
+            </button>
+
         </div>
     </div>
 </template>
