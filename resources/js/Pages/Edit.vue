@@ -3,6 +3,7 @@ import {useForm} from "@inertiajs/vue3";
 import {ref} from "vue";
 import {Head} from "@inertiajs/inertia-vue3";
 
+// this way you can get data that was passed from the controller
 const props = defineProps({
     user: Object,
     errors: Object,
@@ -10,33 +11,44 @@ const props = defineProps({
 
 let prepossessing = ref(false);
 
+// this is use to save data and later send to the controllers
 let form = useForm({
     email: props.user.email,
     name: props.user.name
 });
 
+// this is the function that will be called when the form is submitted,
+// and it will send the data to the controller
 const submit = () => {
     form.patch(route('users.update', props.user.id), {
+        // if the request is successful this function will be called
         onSuccess: () => {
             prepossessing.value = false;
         },
+        // if the request is started this function will be called
         onStart: () => {
             prepossessing.value = true;
         },
+        // if the request is failed this function will be called
         onError: () => {
             prepossessing.value = false;
         }
     });
 }
 
+// this is the function that will be called when the delete button is clicked,
 const destroy = () => {
     if (confirm('Are you sure you want to delete this user?')) {
         //action confirmed
+        // this will send a delete request to the controller
+        // the route() function if of ziggy package, and
+        // it make it so that you can use the name of the route instead of the url
         form.delete(route('users.destroy', props.user.id) );
     }
 }
 </script>
 
+<!-- Mostly normal vuejs -->
 <template>
     <Head title="Demo - Edit" />
 
@@ -91,9 +103,11 @@ const destroy = () => {
             </form>
 
             <!--
-
+            using links
             this is a option for delete button
+            -->
 
+            <!--
             <Link
                 :href="route('users.destroy', user.id)"
                 as="button"

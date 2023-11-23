@@ -11,6 +11,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        // normal laravel
         $users = User::query()
             ->select('id', 'name', 'email')
             ->when($request->input('search'), function ($query, $search) {
@@ -19,6 +20,9 @@ class UserController extends Controller
             ->latest()
             ->paginate(8)
             ->withQueryString();
+        // Instead of returning a view we let inertia render the page
+        // A inertia renders a Vue component with that name
+        // A inertia render can also pass data to the Vue component just like a view
         return Inertia::render('Users', [
             'users' => $users,
             'filters' => $request->all('search'),
@@ -27,6 +31,8 @@ class UserController extends Controller
 
     public function create()
     {
+        // Instead of returning a view we let inertia render the page
+        // A inertia renders a Vue component with that name
         return Inertia::render('Create');
     }
 
@@ -35,16 +41,23 @@ class UserController extends Controller
         // Simulate a slow request
         sleep(3);
 
+        // normal laravel
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => 'password',
         ]);
+
+        // Instead of using a redirect we use to_route()
+        // This way the page doest refresh after the request
         return to_route('users');
     }
 
     public function edit(User $user)
     {
+        // Instead of returning a view we let inertia render the page
+        // A inertia renders a Vue component with that name
+        // A inertia render can also pass data to the Vue component just like a view
         return Inertia::render('Edit', [
             'user' => $user->only('id', 'name', 'email'),
         ]);
@@ -52,16 +65,23 @@ class UserController extends Controller
 
     public function update(UserUpdateOrStoreRequest $request, User $user)
     {
+        // normal laravel
         $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
         ]);
+
+        // Instead of using a redirect we use to_route()
+        // This way the page doest refresh after the request
         return to_route('users');
     }
 
     public function destroy(User $user)
     {
+        // normal laravel
         $user->delete();
+
+        // Instead of using a redirect we use to_route()
         return to_route('users');
     }
 
