@@ -25,7 +25,7 @@ let greeting = [
             <div class="flex items-center">
                 <div class="w-20 h-20">
                     <Link :href="route('index')">
-                        <img class="rounded-full" src="images/smily-logo-placeholder.png" alt="website logo">
+                        <img class="rounded-full" :src="`${route('index')}/images/smily-logo-placeholder.png`" alt="website logo">
                     </Link>
                 </div>
                 <div class="ml-3">
