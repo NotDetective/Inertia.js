@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => Auth::user() ? [
                 'user' => [
                     'username' => Auth::user()->name,
+                    'avatar' => Auth::user()->getFirstMediaUrl('avatars'),
                 ]
             ] : null,
         ]);

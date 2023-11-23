@@ -77,8 +77,9 @@ watch(search, throttle((value) => {
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="flex items-center">
                                             <div class="h-11 w-11 flex-shrink-0">
+                                                <!-- https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg-->
                                                 <img class="h-11 w-11 rounded-full"
-                                                     :src="`https://i.pravatar.cc/150?u=${user.id}` " alt="">
+                                                     :src="user.avatar === '' ? 'https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg' : user.avatar" alt="user profile">
                                             </div>
                                             <div class="ml-4">
                                                 <div class="font-medium text-gray-900">{{ user.name }}</div>
