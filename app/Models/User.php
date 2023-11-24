@@ -55,4 +55,9 @@ class User extends Authenticatable implements HasMedia
         $this->addMediaCollection('avatars')
             ->singleFile();
     }
+
+    public function Tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
