@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Project;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(110)->create()->each(fn ($user) => [
+        $users = User::factory(110)->create()->each(fn($user) => [
             $user->addMediaFromUrl("https://i.pravatar.cc/150?u={$user->id}")->toMediaCollection('avatars'),
         ]);
 
-        \App\Models\User::factory()->create([
+        $projects = Project::factory(10)->create();
+
+        Ticket::factory(100)->create([
+            'user_id' => $users->random()->id,
+            'project_id' => $projects->random()->id,
+        ]);
+
+        User::factory()->create([
             'name' => 'John Doe',
             'email' => 'user@app.com',
         ]);
