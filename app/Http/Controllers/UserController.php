@@ -32,6 +32,11 @@ class UserController extends Controller
         return Inertia::render('Users', [
             'users' => $users,
             'filters' => $request->all('search'),
+            'can' => [
+                // This is the best way to have authorization in your app
+                'create' => true,
+                'update' => true,
+            ],
         ]);
     }
 

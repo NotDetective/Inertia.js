@@ -1,5 +1,12 @@
 <script setup>
 import {Head} from '@inertiajs/inertia-vue3'
+import { router } from '@inertiajs/vue3'
+
+// this is a inbuilt function of inertia
+// it is the same as document.addEventListener for if you leave the page
+router.on('before', (event) => {
+    return confirm('Are you sure you want to navigate away?')
+})
 </script>
 
 <template>

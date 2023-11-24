@@ -1,10 +1,6 @@
 <script setup>
 import NavItem from "@/Shared/NavItem.vue";
 
-defineProps({
-    auth: Object,
-})
-
 let greeting = [
     'Hello',
     'Hi',
@@ -42,10 +38,14 @@ let greeting = [
             <div class="flex flex-col h-full items-end justify-evenly">
                 <!-- greeting only change on page refresh this is done to show that the page doest refresh much -->
                 <div class="flex items-center mb-2">
-                    <p>{{ greeting }}, {{ auth.user.username }}!</p>
+                    <!--
+                    $page.props.auth is shared data shared data is automatically given as a prop
+                    you can still do it with defineProps.
+                    -->
+                    <p>{{ greeting }}, {{ $page.props.auth.user.username }}!</p>
                     <img
                         class="w-10 h-10 rounded-full ml-2"
-                        :src="auth.user.avatar === '' ? 'https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg' : auth.user.avatar"
+                        :src="$page.props.auth.user.avatar === '' ? 'https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg' : $page.props.auth.user.avatar"
                         alt="login user avatar">
                 </div>
 
