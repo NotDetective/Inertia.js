@@ -1,5 +1,6 @@
 <script setup>
 import NavItem from "@/Shared/NavItem.vue";
+import {router} from "@inertiajs/vue3";
 
 let greeting = [
     'Hello',
@@ -63,13 +64,19 @@ let greeting = [
                         Home
                     </NavItem>
                     <NavItem
+                        :active="route().current() === 'tickets'"
+                        :href="route('tickets')"
+                    >
+                        Tickets
+                    </NavItem>
+                    <NavItem
                         :active="route().current() === 'users'"
-                        href="/users"
+                        :href="route('users')"
                     >
                         Users
                     </NavItem>
                     <NavItem
-                        href="/logout"
+                        :href="route('logout')"
                         method="post"
                         as="button"
                     >

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +45,21 @@ Route::middleware(['auth'])
         // Deletes a user simple laravel
         Route::delete('/users/{user}', [UserController::class, 'destroy'])
             ->name('users.destroy');
+
+        // tickets
+        Route::get('/tickets', [TicketController::class, 'index'])
+            ->name('tickets');
+        Route::get('/tickets/create', [TicketController::class, 'create'])
+            ->name('tickets.create');
+        Route::post('/tickets', [TicketController::class, 'store'])
+            ->name('tickets.store');
+        Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])
+            ->name('tickets.edit');
+        Route::patch('/tickets/{ticket}/edit', [TicketController::class, 'update'])
+            ->name('tickets.update');
+        Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])
+            ->name('tickets.destroy');
+        Route::get('/tickets/{ticket}', [TicketController::class, 'show'])
+            ->name('tickets.show');
 
     });
