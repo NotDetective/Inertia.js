@@ -3,7 +3,7 @@ import {ref, watch} from "vue";
 
 const props = defineProps({
     showData: {
-        type: Array,
+        type: Object,
         required: true,
     },
     modelValue: {
@@ -18,10 +18,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
-
+    max: Number,
 })
+let maxAmount = ref(props.max ?? 9999);
 let show = ref(false);
-
 let dropdown = ref(null);
 
 let emit = defineEmits(['update:selectedData', 'update:modelValue']);
@@ -45,8 +45,9 @@ const updateValue = (e) => {
             @click="show = !show"
         >
             {{ name }} {{ selectedData[0] === undefined ? '' : ': ' + selectedData[0] }} <span
-            class="bg-blue-600 text-white ml-2 text-md w-[30px] px-1.5 py-0.5 rounded-full">+{{
-                selectedData.length
+            v-show="selectedData.length > 1"
+            class="bg-blue-600 w-fit text-white ml-2 text-md px-1.5 py-0.5 rounded-full">{{
+                props.selectedData.length > maxAmount ? `${maxAmount}+` : `+${selectedData.length}`
             }}</span>
             <span class="ml-2 text-xs">
                  <svg
