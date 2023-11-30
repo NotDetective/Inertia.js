@@ -68,6 +68,15 @@ class TicketController extends Controller
             ->when($request->has('searchUser'), function ($query) use ($request) {
                 $query->where('name', 'like', "%{$request->input('searchUser')}%");
             })
+            ->when($request->has('search'), function ($query) use ($tickets, $request) {
+                $data = $tickets->pluck('user.name')->unique()->toArray();
+
+                if ($request->input('search') == null) {
+                    return;
+                }
+
+                $query->whereIn('name', $data);
+            })
             ->take(5)
             ->get();
 
@@ -76,6 +85,15 @@ class TicketController extends Controller
             ->select('id', 'name')
             ->when($request->has('searchProject'), function ($query) use ($request) {
                 $query->where('name', 'like', "%{$request->input('searchProject')}%");
+            })
+            ->when($request->has('search'), function ($query) use ($tickets, $request) {
+                $data = $tickets->pluck('project.name')->unique()->toArray();
+
+                if ($request->input('search') == null) {
+                    return;
+                }
+
+                $query->whereIn('name', $data);
             })
             ->take(5)
             ->get();
