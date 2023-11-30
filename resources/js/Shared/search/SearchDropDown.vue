@@ -34,6 +34,11 @@ const updateValue = (e) => {
     emit('update:modelValue', e.target.value);
 }
 
+const addToArray = (data) => {
+    emit('update:modelValue', '');
+    props.selectedData.includes(data.name) ? props.selectedData.splice(props.selectedData.indexOf(data.name), 1) : props.selectedData.push(data.name);
+}
+
 </script>
 
 <template>
@@ -89,7 +94,7 @@ const updateValue = (e) => {
                     <div class="p-1">
                         <button
                             v-for="data in showData"
-                            @click="selectedData.includes(data.name) ? selectedData.splice(selectedData.indexOf(data.name), 1) : selectedData.push(data.name);"
+                            @click="addToArray(data)"
                             class="w-full flex items-center p-1.5 rounded-sm hover:bg-gray-200 focus:outline-none"
                         >
                             <input
