@@ -47,7 +47,7 @@ const updateValue = (e) => {
             {{ name }} {{ selectedData[0] === undefined ? '' : ': ' + selectedData[0] }} <span
             v-show="selectedData.length > 1"
             class="bg-blue-600 w-fit text-white ml-2 text-md px-1.5 py-0.5 rounded-full">{{
-                props.selectedData.length > maxAmount ? `${maxAmount}+` : `+${selectedData.length}`
+                props.selectedData.length > maxAmount ? `${maxAmount}+` : `+${selectedData.length - 1 }`
             }}</span>
             <span class="ml-2 text-xs">
                  <svg
