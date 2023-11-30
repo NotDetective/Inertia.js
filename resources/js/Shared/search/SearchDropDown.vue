@@ -52,14 +52,13 @@ const updateValue = (e) => {
             <span class="ml-2 text-xs">
                  <svg
                      class="fill-current"
-                     :class="{ 'rotate-180': !show }"
+                     :class="{ 'rotate-180': show }"
                      xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                         <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/>
                  </svg>
             </span>
         </button>
         <div
-            :id="`dropdown${name}`"
             ref="dropdown"
             v-show="show"
             class="bg-white text-black absolute w-[300px] drop-shadow-lg mt-0.5 h-68 rounded-md"
